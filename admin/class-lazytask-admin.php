@@ -107,7 +107,7 @@ class Lazytask_Admin {
 	        $userController = new \Lazytask\Controller\Lazytask_UserController();
 			$userResponse = $userController->admin_after_auth_login();
 
-            wp_enqueue_script('pms-rbs', plugin_dir_url(__FILE__) . 'frontend/build/index.js', array('jquery', 'wp-element'), '1.0.0', true);
+            wp_enqueue_script('pms-rbs', plugin_dir_url(__FILE__) . 'frontend/build/index.js', array('jquery', 'wp-element'), '1.0.4', true);
             wp_localize_script('pms-rbs', 'appLocalizer', [
                 'apiUrl' => home_url('/wp-json'),
                 'homeUrl' => home_url(''),

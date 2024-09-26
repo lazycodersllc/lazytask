@@ -101,7 +101,7 @@ class Lazytask_Public {
 
 		if (is_page('lazy-task')) {
 			// phpcs:ignore WordPress.WP.EnqueuedScriptsScope
-			wp_enqueue_script('pms-rbs', plugin_dir_url( __DIR__ ) . 'admin/frontend/build/index.js', array('jquery', 'wp-element'), '1.0.0', true);
+			wp_enqueue_script('pms-rbs', plugin_dir_url( __DIR__ ) . 'admin/frontend/build/index.js', array('jquery', 'wp-element'), '1.0.4', true);
 			wp_localize_script('pms-rbs', 'appLocalizer', [
 				'apiUrl' => home_url('/wp-json'),
 				'homeUrl' => home_url(''),

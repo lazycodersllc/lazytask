@@ -1,10 +1,10 @@
 === LazyTasks - Project & Task Management with Collaboration, Kanban and Gantt Chart ===
-Contributors: lazycoders
+Contributors: lazycoders,nmkhan,phpfour,theweblab
 Donate link: https://lazycoders.co
 Tags: Project management, bug tracking, swimlane, calendar, collaboration
 Requires at least: 3.0.1
 Tested up to: 6.6
-Stable tag: 1.0.0
+Stable tag: 1.0.4
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,6 +38,7 @@ We believe powerful project management should be accessible to everyone. LazyTas
 - **Task Assignments and Follow-ups for team collaboration**
 - **Comments on Tasks for seamless communication**
 - **Customizable Dashboards for a personalized experience**
+- **Notification template creation to use internally or even integrate with other plugins**
 - **Notification templets to notify**
 
 **And much more!**
@@ -65,12 +66,12 @@ We give you the facility to build your IOS App , which is ready for publication.
 4. Click "Install Now" and then activate LazyTasks.
 
 == Milestone ==
-- **Integrated Calendar View:**
-Stay ahead of your deadlines with our integrated calendar, ensuring you never miss a milestone or a meeting.
+- **My Zen integration:**
+Stay ahead of own schedule with our integrated My Zen, ensuring you never miss a due date or any meetings.
 - **Swimlane Views:**
 Organize tasks in swimlane format for an additional layer of categorization, perfect for managing multiple projects or teams simultaneously.
 - **Gantt Chart Visualization:**
-Plan your projects with precision using our Gantt chart feature, allowing you to see the bigger picture of your project timelines and dependencies.
+Plan your projects precisely using our Gantt chart feature, allowing you to see the bigger picture of your project timelines and dependencies.
 
 == Frequently Asked Question ==
 **Q: Is LazyTasks compatible with any theme?**
@@ -81,9 +82,21 @@ Plan your projects with precision using our Gantt chart feature, allowing you to
 **A:** Certainly! We highly value community feedback to enhance LazyTasks. Please contact us through our support page or directly via our website.
 
 == Screenshots ==
-1. **Dashboard**
-2. **Project creation**
-3. **Tasks list view**
-4. **Tasks board view**
-5. **Task creation process**
-6. **Calendar view**
+1. **Project creation**
+2. **Tasks list view**
+4. **Task creation process**
+3. **Tasks board view**
+5. **Calendar view**
+6. **Dashboard**
+
+== Changelog ==
+
+= 1.0.4 - 2024-09-26 =
+* New: Workspace, project, section, task, and sub-task can now be deleted
+* New: Notification template creation to use internally or even integrate with other plugins
+* New: Notification via email using default templates
+* New: Permission added to all delete operations
+* Upgrade: Modified UI/UX in the task list
+* Upgrade: Quick tasks can be converted into tasks
+* Upgrade: Some minor security updates
+* Upgrade: Integrated Calendar View
