@@ -57,7 +57,7 @@ class Lazytask_Activator {
 				'post_content' => '',
 				'post_status'  => 'publish',
 				'post_type'    => 'page',
-				'page_template' => plugin_dir_url( __DIR__ ) .'templates/lazytask-page-template.php',
+				'page_template' => plugin_dir_path( dirname( __FILE__ ) ) .'templates/lazytask-page-template.php',
 			);
 
 

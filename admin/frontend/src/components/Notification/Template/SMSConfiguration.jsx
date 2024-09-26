@@ -144,7 +144,7 @@ const SMSConfiguration = () => {
 
 
                 <Group justify="flex-start" mt="md">
-                    <Button type="submit">Submit</Button>
+                    <Button variant="filled" color="#ED7D31" type="submit">Submit</Button>
                 </Group>
             </form>
         </Paper>

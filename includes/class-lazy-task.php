@@ -184,7 +184,7 @@ class Lazytask_Lazy_Task {
      */
     public function lazytask_add_page_template_to_dropdown( $templates )
     {
-        $templates[plugin_dir_url( __DIR__ ) . 'templates/lazytask-page-template.php'] = __( 'Lazy PMS Page Template', 'lazytasks-project-task-management' );
+        $templates[plugin_dir_path( dirname( __FILE__ ) ) . 'templates/lazytask-page-template.php'] = __( 'Lazy PMS Page Template', 'lazytasks-project-task-management' );
 
         return $templates;
     }
@@ -195,7 +195,7 @@ class Lazytask_Lazy_Task {
      */
     function lazytask_load_plugin_template( $template ) {
 
-        if(  get_page_template_slug() === plugin_dir_url( __DIR__ )  . 'templates/lazytask-page-template.php' ) {
+        if(  get_page_template_slug() === plugin_dir_path( dirname( __FILE__ ) )  . 'templates/lazytask-page-template.php' ) {
             $template = plugin_dir_path( dirname( __FILE__ ) ). 'templates/lazytask-page-template.php';
         }
         if($template == '') {

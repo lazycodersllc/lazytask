@@ -57,7 +57,7 @@ const Profile = () => {
 
     return (
         <>
-            <Header />
+            {/*<Header />*/}
             <div className='dashboard'>
                 <Container size="full">
                     <div className="lm-profile-form flex items-center justify-center h-[calc(100vh-165px)]">

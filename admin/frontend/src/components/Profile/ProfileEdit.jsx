@@ -96,7 +96,7 @@ const ProfileEdit = () => {
     };
     return (
         <>
-            <Header />
+            {/*<Header />*/}
             <ScrollArea>
 
             <div className='dashboard'>

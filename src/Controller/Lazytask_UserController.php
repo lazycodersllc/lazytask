@@ -22,28 +22,31 @@ final class Lazytask_UserController {
 		if($results){
 			foreach ($results as $key => $value) {
 				$roles = $this->getRolesByUser($value['ID']);
+				$llc_roles = [];
 				if(isset($roles['roles']) && sizeof($roles['roles'])>0){
+					$llc_roles = isset($roles['roles']) && sizeof($roles['roles'])>0 ? $roles['roles'] : [];
 
-					$user = get_userdata( $value['ID'] );
+				}
+
+				$user = get_userdata( $value['ID'] );
 
 // Get all the user roles as an array.
-					$user_roles = $user->roles;
+				$user_roles = $user->roles;
 
-					$returnArray[] = [
-						'id' => $value['ID'],
-						'name' => $value['display_name'],
-						'email' => $value['user_email'],
-						'username' => $value['user_login'],
-						'phoneNumber' => get_user_meta($value['ID'], 'phone_number', true),
-						'firstName' => get_user_meta($user->ID, 'first_name', true),
-						'lastName' => get_user_meta($user->ID, 'last_name', true),
-						'created_at' => $value['user_registered'],
-						'avatar' => self::getUserAvatar($value['ID']),
-						'roles' => $user_roles,
-						'llc_roles' => isset($roles['roles']) && sizeof($roles['roles'])>0 ? $roles['roles'] : [],
-						'llc_permissions' => isset($roles['permissions']) && sizeof($roles['permissions'])>0 ? array_unique($this->array_flatten( $roles['permissions'])) : [],
-					];
-				}
+				$returnArray[] = [
+					'id' => $value['ID'],
+					'name' => $value['display_name'],
+					'email' => $value['user_email'],
+					'username' => $value['user_login'],
+					'phoneNumber' => get_user_meta($value['ID'], 'phone_number', true),
+					'firstName' => get_user_meta($user->ID, 'first_name', true),
+					'lastName' => get_user_meta($user->ID, 'last_name', true),
+					'created_at' => $value['user_registered'],
+					'avatar' => self::getUserAvatar($value['ID']),
+					'roles' => $user_roles,
+					'llc_roles' => $llc_roles,
+					'llc_permissions' => isset($roles['permissions']) && sizeof($roles['permissions'])>0 ? array_unique($this->array_flatten( $roles['permissions'])) : [],
+				];
 
 			}
 

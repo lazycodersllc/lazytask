@@ -56,6 +56,18 @@ const SettingsNav = () => {
         }
     };
 
+    document.addEventListener('DOMContentLoaded', function () {
+            if (window.lazytaskPremium) {
+                window.lazytaskPremium.licenseTabButton();
+            }
+        }
+    );
+    useEffect(() => {
+        if (window.lazytaskPremium) {
+            window.lazytaskPremium.licenseTabButton();
+        }
+    }, [location]);
+
     return (
         <>
            <div className="relative flex justify-between mb-3">
@@ -142,6 +154,14 @@ const SettingsNav = () => {
                     </Button>
                 </NavLink>
                 }
+
+                {hasPermission(loggedInUser && loggedInUser.llc_permissions, ['superadmin']) &&
+                    <div id="lazytask_premium_license_tab_button">
+                        {/*for preminum*/}
+
+                    </div>
+                }
+
 
                 <div className={`flex w-full justify-end gap-2`}>
                     {(location.pathname === '/project' || location.pathname === '/users') &&

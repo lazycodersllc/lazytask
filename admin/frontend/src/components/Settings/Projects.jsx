@@ -19,30 +19,21 @@ const Projects = () => {
 
   return (
     <Fragment>
-      <Header /> 
-      <div className='dashboard'> 
-        <Container size="full">
-          <div className="settings-page-card bg-white rounded-xl p-6 pt-3 my-5 mb-0">
-            <SettingsNav />
-            <ScrollArea className="h-[calc(100vh-230px)] pb-[2px]" scrollbarSize={4}>
-              <Grid gutter={{base: 20}} overflow="hidden" align="stretch" spacing="sm" verticalSpacing="sm">
-                  {hasPermission(loggedInUser && loggedInUser.llc_permissions, ['superadmin', 'admin', 'director']) &&
-                      <Grid.Col  span={{ base: 12, xs:6, sm:4, md: 3, lg: 3 }}>
-                          <CreateProjectModal buttonStyle="a" />
-                      </Grid.Col>
-                  }
-                  {Array.isArray(projects) &&
-                      projects && projects.length>0 && projects.map((project, index) => (
-                      <Grid.Col key={index} span={{ base: 12, xs:6, sm:4, md: 3, lg: 3 }}>
-                          <ProjectCard key={index}  {...project} />
-                      </Grid.Col>
-                  ))}
-              </Grid>
-            </ScrollArea>
-
-          </div>
-        </Container>
-      </div>
+        <ScrollArea className="h-[calc(100vh-230px)] pb-[2px]" scrollbarSize={4}>
+            <Grid gutter={{base: 20}} overflow="hidden" align="stretch" spacing="sm" verticalSpacing="sm">
+                {hasPermission(loggedInUser && loggedInUser.llc_permissions, ['superadmin', 'admin', 'director']) &&
+                    <Grid.Col  span={{ base: 12, xs:6, sm:4, md: 3, lg: 3 }}>
+                        <CreateProjectModal buttonStyle="a" />
+                    </Grid.Col>
+                }
+                {Array.isArray(projects) &&
+                    projects && projects.length>0 && projects.map((project, index) => (
+                        <Grid.Col key={index} span={{ base: 12, xs:6, sm:4, md: 3, lg: 3 }}>
+                            <ProjectCard key={index}  {...project} />
+                        </Grid.Col>
+                    ))}
+            </Grid>
+        </ScrollArea>
     </Fragment>
   );
 }

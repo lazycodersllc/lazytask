@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Container, Group, ScrollArea, Select, TextInput, Text, Box, Title, Image} from '@mantine/core';
+import {Button, Container, Group, ScrollArea, Select, TextInput, Text, Box, Title, Image, PasswordInput} from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Link } from 'react-router-dom';
 import useAuth from "../../utils/useAuth";
@@ -72,13 +72,12 @@ const Login = () => {
                                     }}
                                 />
 
-                                <TextInput
-                                    type="password"
-                                    placeholder="Password"
+                                <PasswordInput
+                                    size="md"
                                     mb={16}
                                     {...form.getInputProps('password')}
                                     radius="sm"
-                                    size="md"
+                                    placeholder="Password"
                                     styles={{
                                         width: '100%',
                                         borderColor: 'gray.3',
@@ -88,6 +87,8 @@ const Login = () => {
                                         },
                                     }}
                                 />
+
+
                                 <div className="mb-4 text-center">
                                     <Link to="/forget-password"
                                           className="text-orange-500 font-semibold text-base leading-normal text-center mt-24 mb-24 focus:shadow-none">

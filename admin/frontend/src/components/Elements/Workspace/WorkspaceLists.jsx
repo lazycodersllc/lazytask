@@ -44,7 +44,7 @@ const WorkspaceLists = () => {
 
         <ScrollArea className="h-[calc(100vh-100px)] pr-1" scrollbarSize={4} offsetScrollbars={true}>
             <Accordion variant="separated" defaultValue="" classNames={{
-                label: '!py-3',
+                label: '!py-3 !font-semibold !text-sm',
                 item:'!mt-2 !border-solid !border !border-gray-300',
                 control: '!bg-white font-bold !rounded-md',
                /* content: '!px-0',
@@ -71,7 +71,7 @@ const WorkspaceLists = () => {
 
                               key={`${project.id}-${index}`}
                                      style={{"lineHeight":"normal"}}
-                                     className="flex text-[#346A80] hover:bg-[#EBF1F4] cursor-pointer !py-2 !px-4"
+                                     className="flex !text-[#346A80] hover:bg-[#EBF1F4] cursor-pointer !py-2 !px-4 rounded text-sm"
                                      onClick={() => goToTasksList(project.id)}>
                                   <div className={`flex items-center w-full`}>
                                       <p className={`w-full ${location && (location.pathname === '/project/task/list/'+project.id ||  location.pathname === '/project/task/board/'+project.id || location.pathname === '/project/task/calendar/'+project.id ) ? 'font-semibold text-black':'text-[#346A80]'}`}>

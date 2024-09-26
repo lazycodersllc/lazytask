@@ -1,12 +1,12 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Routes, Route, HashRouter, useLocation} from 'react-router-dom';
+import {Routes, Route, HashRouter, useLocation, browserHistory} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile/Profile';
 import ResetPassword from './components/Profile/ResetPassword';
 import Settings from './components/Settings/Settings';
 import Workspace from './components/Settings/Workspace';
 import Projects from './components/Settings/Projects';
-import ProjectDetails from './components/Elements/Project/ProjectDetails'; 
+import ProjectDetails from './components/Elements/Project/ProjectDetails';
 import {Provider, useDispatch} from 'react-redux';
 import store from './store';
 import { useSelector } from 'react-redux';
@@ -24,6 +24,11 @@ import {setUser} from "./store/auth/userSlice";
 import ForgetPassword from "./components/Profile/ForgetPassword";
 import ChangePassword from "./components/Login/ChangePassword";
 import Users from "./components/Settings/Users";
+import PremiumRoute from "./route/PremiumRoute";
+import Header from './components/Header';
+import SettingMain from "./components/Settings/SettingMain";
+
+// import License from "./view/license/License"
 
 const AppRoutes = () => {
 
@@ -75,39 +80,72 @@ const AppRoutes = () => {
     }, [dispatch]);
 
     const { signedIn, loggedInUser } = useSelector((state) => state.auth.session)
-    console.log(signedIn)
+
+    const [premiumRoutes, setPremiumRoutes] = useState([]);
+    document.addEventListener('DOMContentLoaded', function () {
+            if (window.lazytaskPremium) {
+                setPremiumRoutes(...premiumRoutes, window.lazytaskPremium.premiumAppRoutes);
+            }
+        }
+    );
     return (
-      <HashRouter>
-          <Routes>
+        <>
+            <HashRouter>
+                <Routes>
+                    {/*<Route path="/" element={<ProtectedRoute authenticated={signedIn} />}>*/}
+                    <Route path="/" element={<ProtectedWithHeader signedIn={signedIn}/>}>
+                        {/*<Route path="/" element={<Dashboard />} />*/}
+                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/my-task" element={<MyTask />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/profile/:id" element={<ProfileEdit />} />
+                        <Route path="/resetpassword" element={<ResetPassword />} />
+                        <Route path="/" element={<SettingMain />}>
+                            <Route path="/settings" element={<Settings />} />
+                            <Route path="/users" element={<Users />} />
+                            <Route path="/workspace" element={<Workspace />} />
+                            <Route path="/project" element={<Projects />} />
+                            {premiumRoutes.length > 0 && premiumRoutes.map((route, index) => (
+                                <Route
+                                    key={route.key + index}
+                                    path={route.path}
+                                    element={
+                                        <PremiumRoute
+                                            routeKey={route.key}
+                                            component={route.component}
+                                            {...route.meta}
+                                        />
+                                    }
+                                />
+                            ))}
+                        </Route>
+                        <Route path="/project/task/list/:id" element={<ProjectDetails />} />
+                        <Route path="/project/task/board/:id" element={<ProjectDetails />} />
+                        <Route path="/project/task/calendar/:id" element={<ProjectDetails />} />
+                        <Route path="/notification-template" element={<NotificationTemplate />} />
+                    </Route>
+                    <Route path="/" element={<PublicRoute authenticated={signedIn} />}>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/lazy-login" element={<Login />} />
+                        <Route path="/forget-password" element={<ForgetPassword />} />
+                        <Route path="/change-password" element={<ChangePassword />} />
+                    </Route>
 
-              <Route path="/" element={<ProtectedRoute authenticated={signedIn} />}>
-                  {/*<Route path="/" element={<Dashboard />} />*/}
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/my-task" element={<MyTask />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/profile/:id" element={<ProfileEdit />} />
-                  <Route path="/resetpassword" element={<ResetPassword />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/workspace" element={<Workspace />} />
-                  <Route path="/project" element={<Projects />} />
-                  <Route path="/project/task/list/:id" element={<ProjectDetails />} />
-                  <Route path="/project/task/board/:id" element={<ProjectDetails />} />
-                  <Route path="/project/task/calendar/:id" element={<ProjectDetails />} />
-                  <Route path="/notification-template" element={<NotificationTemplate />} />
-              </Route>
-              <Route path="/" element={<PublicRoute authenticated={signedIn} />}>
-                  <Route path="/" element={<Login />} />
-                  <Route path="/lazy-login" element={<Login />} />
-                  <Route path="/forget-password" element={<ForgetPassword />} />
-                  <Route path="/change-password" element={<ChangePassword />} />
-              </Route>
-
-              {/*<Route path="/project/project-details" element={<ProjectDetails />} />*/}
-              {/*<Route path="/project/project-board" element={<ProjectDetails />} />*/}
-          </Routes>
-      </HashRouter>
+                    {/*<Route path="/project/project-details" element={<ProjectDetails />} />*/}
+                    {/*<Route path="/project/project-board" element={<ProjectDetails />} />*/}
+                </Routes>
+            </HashRouter>
+        </>
   );
 };
+
+function ProtectedWithHeader({ element, signedIn }) {
+    return (
+        <>
+            <Header />
+            <ProtectedRoute element={element} authenticated={signedIn} />
+        </>
+    );
+}
 
 export default AppRoutes;

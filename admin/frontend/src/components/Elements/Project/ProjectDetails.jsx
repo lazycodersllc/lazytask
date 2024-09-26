@@ -35,7 +35,7 @@ const ProjectDetails = () => {
 
     return (
         <Fragment>
-            <Header /> 
+            {/*<Header /> */}
             <div className='dashboard'> 
                 <Container size="full">
                     <div className="settings-page-card bg-white rounded-xl p-6 pt-3 my-5 mb-0">

@@ -547,6 +547,32 @@ class Lazytask_DatabaseTableSchema {
 ";
 		require_once (ABSPATH. 'wp-admin/includes/upgrade.php');
 		dbDelta($table_generate_query);
+
+		$db = self::get_global_wp_db();
+		//role superadmin
+		$roleSuperAdmin = $db->get_row("SELECT * FROM ". LAZYTASK_TABLE_PREFIX . "roles WHERE slug = 'superadmin'");
+		//how to get admin user
+		$adminUsers = get_users(['role' => 'administrator']);
+//		var_dump($adminUsers);die;
+		if(sizeof($adminUsers)>0){
+			foreach ($adminUsers as $adminUser){
+				$checkUserHasRole = $db->get_row("SELECT * FROM $table_name WHERE user_id = $adminUser->ID AND role_id = $roleSuperAdmin->id");
+				if($checkUserHasRole == null){
+					$db->insert($table_name, [
+						'user_id' => $adminUser->ID,
+						'role_id' => $roleSuperAdmin->id
+					]);
+					$roles = array(
+						0 => array(
+							"id" => (string)$roleSuperAdmin->id,
+							"name" => $roleSuperAdmin->name,
+						)
+					);
+					$arraySerialize = serialize($roles);
+					add_user_meta($adminUser->ID, 'll_roles', $arraySerialize, true);
+				}
+			}
+		}
 	}
 
 	private static function tbl_comments(){
